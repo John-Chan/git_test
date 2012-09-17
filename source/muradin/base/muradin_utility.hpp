@@ -1,0 +1,8 @@
+#ifndef MURADIN_UTILITY_HPP_INCLUDED
+#define MURADIN_UTILITY_HPP_INCLUDED
+
+//template <class T>
+
+
+
+#endif // MURADIN_UTILITY_HPP_INCLUDED
