@@ -264,6 +264,18 @@
 				Name="net"
 				>
 				<File
+					RelativePath="..\..\..\..\source\muradin\net\acceptor.cc"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\acceptor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\app_callback.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\..\source\muradin\net\buffer.cc"
 					>
 				</File>
@@ -309,6 +321,30 @@
 				</File>
 				<File
 					RelativePath="..\..\..\..\source\muradin\net\io_service.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\socket_addr.cc"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\socket_addr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\tcp_server.cc"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\tcp_server.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\tcp_socket.cc"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\source\muradin\net\tcp_socket.h"
 					>
 				</File>
 				<Filter

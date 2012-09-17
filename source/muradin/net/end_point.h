@@ -9,23 +9,21 @@
 namespace muradin{
 	namespace net{
 
-		//typedef	sockaddr_storage	SockecAddress;
 		typedef	sockaddr_in			SockecAddressV4;	// same as struct sockaddr
-		//typedef	sockaddr_in6		SockecAddressV6;
 
 		/// POD class
-		class EndPointV4
+		class endpoint_v4
 		{
 
 		public:
-			EndPointV4();
-			EndPointV4(uint16_t port);
-			explicit EndPointV4(const std::string& ip);
-			EndPointV4(const std::string& ip,uint16_t port);
-			explicit EndPointV4(const SockecAddressV4& address );
+			endpoint_v4();
+			endpoint_v4(uint16_t port);
+			explicit endpoint_v4(const std::string& ip);
+			endpoint_v4(const std::string& ip,uint16_t port);
+			explicit endpoint_v4(const SockecAddressV4& address );
 
 
-			~EndPointV4();
+			~endpoint_v4();
 
 			const SockecAddressV4&	Address()const;
 			SockecAddressV4&		Address();
@@ -35,7 +33,7 @@ namespace muradin{
 			static std::string		AddressAny();
 			static uint16_t			PortAny();
 
-			const EndPointV4&		operator=(const SockecAddressV4& rh);
+			const endpoint_v4&		operator=(const SockecAddressV4& rh);
 		private:
 			SockecAddressV4	address_;
 			enum {kPortAny=0};

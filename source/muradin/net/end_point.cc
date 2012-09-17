@@ -1,14 +1,14 @@
 #include <muradin/net/end_point.h>
 #include <string.h>
 #include <netinet/in.h>
-#include "socket_addr.h"
-#include "endian.h"
+#include <muradin/net/socket_addr.h>
+#include <muradin/net/endian.h>
 
 
 namespace muradin{
 	namespace net{
 
-		EndPointV4::EndPointV4(const std::string& ip,uint16_t port)
+		endpoint_v4::endpoint_v4(const std::string& ip,uint16_t port)
 		{
 			//address_.sin_len=sizeof(address_);
 			address_.sin_family=AF_INET;
@@ -16,7 +16,7 @@ namespace muradin{
 			net_pton(AF_INET,ip.c_str(),&address_.sin_addr);
 		}
 
-		EndPointV4::EndPointV4(const std::string& ip)
+		endpoint_v4::endpoint_v4(const std::string& ip)
 		{
 			//address_.sin_len=sizeof(address_);
 			address_.sin_family=AF_INET;
@@ -24,7 +24,7 @@ namespace muradin{
 			net_pton(AF_INET,ip.c_str(),&address_.sin_addr);
 		}
 
-		EndPointV4::EndPointV4(uint16_t port)
+		endpoint_v4::endpoint_v4(uint16_t port)
 		{
 			//address_.sin_len=sizeof(address_);
 			address_.sin_family=AF_INET;
@@ -32,44 +32,44 @@ namespace muradin{
 			address_.sin_addr.s_addr = INADDR_ANY;
 		}
 
-		EndPointV4::EndPointV4()
+		endpoint_v4::endpoint_v4()
 		{
 			//address_.sin_len=sizeof(address_);
 			address_.sin_family=AF_INET;
 			address_.sin_port= uint16_hton(kPortAny);
 			address_.sin_addr.s_addr= INADDR_ANY;
 		}
-		EndPointV4::EndPointV4(const SockecAddressV4& address )
+		endpoint_v4::endpoint_v4(const SockecAddressV4& address )
 		{
 			::memcpy(&address_,&address,sizeof(SockecAddressV4));
 		}
 
-		EndPointV4::~EndPointV4()
+		endpoint_v4::~endpoint_v4()
 		{
 			//
 		}
-		SockecAddressV4&		EndPointV4::Address()
+		SockecAddressV4&		endpoint_v4::Address()
 		{
 			return address_ ;
 		}
-		const SockecAddressV4&	EndPointV4::Address()const
+		const SockecAddressV4&	endpoint_v4::Address()const
 		{
 			return address_ ;
 		}
 
-		const std::string		EndPointV4::GetIP()const
+		const std::string		endpoint_v4::GetIP()const
 		{
 			char addr_str[100]={0};
 			net_ntop(address_.sin_family,&address_.sin_addr,addr_str,sizeof(addr_str) );
 			return std::string(addr_str);
 		}
 
-		uint16_t				EndPointV4::GetPort()const
+		uint16_t				endpoint_v4::GetPort()const
 		{
 			return uint16_ntoh(address_.sin_port);
 		}
 
-		std::string				EndPointV4::AddressAny()
+		std::string				endpoint_v4::AddressAny()
 		{
 			char addr_str[100]={0};
 			int32_t	ip_addr=INADDR_ANY;
@@ -77,12 +77,12 @@ namespace muradin{
 			return std::string(addr_str);
 		}
 
-		uint16_t				EndPointV4::PortAny()
+		uint16_t				endpoint_v4::PortAny()
 		{
 			return kPortAny;
 		}
 
-		const EndPointV4&		EndPointV4::operator=(const SockecAddressV4& rh)
+		const endpoint_v4&		endpoint_v4::operator=(const SockecAddressV4& rh)
 		{
 			::memcpy(&address_,&rh,sizeof(SockecAddressV4));
 			return *this;

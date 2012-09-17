@@ -4,49 +4,44 @@
 #endif
 
 namespace muradin{
-	namespace base{
-		//
-	};//base
-};//muradin
-
 namespace net{
-	
-uint16_t	uint16_hton(uint16_t val)
-{
+
+	uint16_t	uint16_hton(uint16_t val)
+	{
 #ifndef	NO_SOCKET_HEADER_INCLUDE_
-	return ::htons(val);
+		return ::htons(val);
 #else
-	return is_big_endianess() ? val : reverse_two_bytes(val);
+		return is_big_endianess() ? val : reverse_two_bytes(val);
 #endif
-}
+	}
 
-uint16_t	uint16_ntoh(uint16_t val)
-{
+	uint16_t	uint16_ntoh(uint16_t val)
+	{
 #ifndef	NO_SOCKET_HEADER_INCLUDE_
-	return ::ntohs(val);
+		return ::ntohs(val);
 #else
-	return is_big_endianess() ? val : reverse_two_bytes(val);
+		return is_big_endianess() ? val : reverse_two_bytes(val);
 #endif
 
-}
+	}
 
-uint32_t	uint32_hton(uint32_t val)
-{
+	uint32_t	uint32_hton(uint32_t val)
+	{
 #ifndef	NO_SOCKET_HEADER_INCLUDE_
-	return ::htonl(val);
+		return ::htonl(val);
 #else
-	return is_big_endianess() ? val : reverse_four_bytes(val);
+		return is_big_endianess() ? val : reverse_four_bytes(val);
 #endif
-}
+	}
 
-uint32_t	uint32_ntoh(uint32_t val)
-{
+	uint32_t	uint32_ntoh(uint32_t val)
+	{
 #ifndef	NO_SOCKET_HEADER_INCLUDE_
-	return ::ntohl(val);
+		return ::ntohl(val);
 #else
-	return is_big_endianess() ? val : reverse_four_bytes(val);
+		return is_big_endianess() ? val : reverse_four_bytes(val);
 #endif
-}
+	}
 
-
-};
+};//net
+};//muradin
