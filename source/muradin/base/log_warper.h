@@ -72,7 +72,7 @@ private:
 };//muradin
 
 #define		debug_loger					(muradin::base::log_warper(muradin::base::ll_debug,__FILE__,__FUNCTION__,__LINE__))
-#define		debug_err_loger				(muradin::base::log_warper(muradin::base::ll_debug,__FILE__,__FUNCTION__,__LINE__,(get_last_error_)))
+#define		debug_err_loger					(muradin::base::log_warper(muradin::base::ll_debug,__FILE__,__FUNCTION__,__LINE__,(get_last_error_)))
 #define		info_loger					(muradin::base::log_warper(muradin::base::ll_info,__FILE__,__FUNCTION__,__LINE__))
 #define		warn_loger					(muradin::base::log_warper(muradin::base::ll_warning,__FILE__,__FUNCTION__,__LINE__))
 #define		err_loger					(muradin::base::log_warper(muradin::base::ll_error,__FILE__,__FUNCTION__,__LINE__))

@@ -1,6 +1,6 @@
 #include <muradin/net/evt_poller/epoll_poller.h>
 #include <muradin/net/io_channel.h>
-#include <muradin/base/log_waper.h>
+#include <muradin/base/log_warper.h>
 #include <errno.h>
 
 int ep_create_or_exit()

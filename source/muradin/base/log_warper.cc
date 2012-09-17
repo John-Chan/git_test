@@ -3,7 +3,10 @@
 
 #include <iostream>
 #include <stdlib.h> // for abort()
-namespace loging
+
+namespace muradin
+{
+namespace base
 {
 
 OutputFunc	g_out_put_func=NULL;
@@ -212,4 +215,5 @@ void log_warper::setFlush(FlushFunc  func)
 {
 	g_flush_func = func;
 }
-};//loging
+};//base
+};//muradin
