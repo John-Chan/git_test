@@ -1,4 +1,4 @@
-#include <muradin/base/buffer.h>
+#include <muradin/net/buffer.h>
 #include <algorithm>
 #include <assert.h>
 

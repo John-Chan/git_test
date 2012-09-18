@@ -2,8 +2,7 @@
 #include <muradin/base/timestamp.h>
 #include <stdio.h>
 
-
-//#include <boost/static_assert.hpp>
+#include <boost/static_assert.hpp>
 
 #if (defined(_ENV_MSVCPP)) 
 #define snprintf	_snprintf
@@ -16,20 +15,20 @@
 
 #endif // _ENV_MSVCPP
 
+BOOST_STATIC_ASSERT(sizeof(muradin::base::timestamp) == sizeof(int64_t));
 
-//BOOST_STATIC_ASSERT(sizeof(Timestamp) == sizeof(int64_t));
 namespace muradin
 {
 namespace base
 {
 
 
-Timestamp::Timestamp(int64_t microseconds)
+timestamp::timestamp(int64_t microseconds)
   : microSecondsSinceEpoch_(microseconds)
 {
 }
 
-std::string Timestamp::toString() const
+std::string timestamp::to_string() const
 {
   char buf[32] = {0};
   int64_t seconds = microSecondsSinceEpoch_ / kMicroSecondsPerSecond;
@@ -38,13 +37,14 @@ std::string Timestamp::toString() const
 #if (defined(_ENV_MSVCPP)) 
   snprintf(buf, sizeof(buf)-1, "%I64d.%06I64d", seconds, microseconds);
 #else
-  snprintf(buf, sizeof(buf)-1, "%" PRId64 ".%06" PRId64 "", seconds, microseconds);
+  BOOST_STATIC_ASSERT(sizeof(long long int) == sizeof(int64_t));
+  snprintf(buf, sizeof(buf)-1, "%lld.%06lld", (long long int)seconds, (long long int)microseconds);
 #endif // _ENV_MSVCPP
 
   return std::string(buf);
 }
 
-std::string Timestamp::toFormattedString() const
+std::string timestamp::to_formatted_string() const
 {
 	char buf[32] = {0};
 	struct tm tm_time;
@@ -68,7 +68,7 @@ std::string Timestamp::toFormattedString() const
   return std::string(buf);
 }
 
-std::string Timestamp::toPathString() const
+std::string timestamp::to_formatted_string1() const
 {
 	char buf[32] = {0};
 	struct tm tm_time;
@@ -84,7 +84,7 @@ std::string Timestamp::toPathString() const
 	gmtime_r(&seconds, &tm_time);
 #endif // _ENV_MSVCPP
 
-	snprintf(buf, sizeof(buf), "%4d%02d%02d_%02d%02d%02d_%06d",
+	snprintf(buf, sizeof(buf), "%4d%02d%02d-%02d%02d%02d-%06d",
 		tm_time.tm_year + 1900, tm_time.tm_mon + 1, tm_time.tm_mday,
 		tm_time.tm_hour, tm_time.tm_min, tm_time.tm_sec,
 		microseconds);
@@ -92,24 +92,24 @@ std::string Timestamp::toPathString() const
 	return std::string(buf);
 }
 
-Timestamp Timestamp::now()
+timestamp timestamp::now()
 {
 #if (defined(_ENV_MSVCPP)) 
 	int64_t seconds = 0;
 	_time64( &seconds );
     
-	return Timestamp(seconds);
+	return timestamp(seconds);
 #else
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
 	int64_t seconds = tv.tv_sec;
-	return Timestamp(seconds * kMicroSecondsPerSecond + tv.tv_usec);
+	return timestamp(seconds * kMicroSecondsPerSecond + tv.tv_usec);
 #endif // _ENV_MSVCPP
 }
 
-Timestamp Timestamp::invalid()
+timestamp timestamp::invalid()
 {
-  return Timestamp();
+  return timestamp();
 }
 
 

@@ -52,15 +52,6 @@ public:
 
 	static void setOutput(OutputFunc func);
 	static void setFlush(FlushFunc func);
-
-    static const char* EOL()
-    {
-#if (defined( _ENV_WIN))
-        return "\r\n";
-#else
-        return "\n";
-#endif
-    }
 private:
 	log_warper(const log_warper&);
 	log_warper&	operator=(const log_warper&);
@@ -79,6 +70,15 @@ private:
 // write log and call abort()
 #define		fata_loger					(muradin::base::log_warper(muradin::base::ll_fatal_err,__FILE__,__FUNCTION__,__LINE__))
 
+/// end of line
+static const char* EOL()
+{
+#if (defined( _ENV_WIN))
+    return "\r\n";
+#else
+    return "\n";
+#endif
+}
 
 
 #endif // log_warper_h__

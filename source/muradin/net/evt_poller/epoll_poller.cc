@@ -5,9 +5,9 @@
 
 int ep_create_or_exit()
 {
-    int fd =::::epoll_create1(EPOLL_CLOEXEC);
+    int fd = ::epoll_create1(EPOLL_CLOEXEC);
     if(fd<0){
-        fata_loger.stream()<<"epoll_create fail :" <<errno<<log_warper::EOL();
+        fata_loger.stream()<<"epoll_create fail :" <<errno<<EOL();
 		::abort();
     }
     return fd;
@@ -22,7 +22,7 @@ ep_poller::ep_poller()
 }
 ep_poller::~ep_poller()
 {
-    ::fclose(m_ep_fd);
+    ::close(m_ep_fd);
 }
 uint64_t ep_poller::wait_for_evt(channel_vec &singled_channel,int32_t timeout)
 {
@@ -32,9 +32,9 @@ uint64_t ep_poller::wait_for_evt(channel_vec &singled_channel,int32_t timeout)
 	    BOOST_ASSERT(k_max_poll_size >= poll_ret);
 	    fill_channel_list(singled_channel,signed_evt,poll_ret);
 	}else if(poll_ret == 0 ){
-	    info_loger.stream()<<"epoll_wait got noting in :" <<timeout<< " millisecond"<<log_warper::EOL();
+	    info_loger.stream()<<"epoll_wait got noting in :" <<timeout<< " millisecond"<<EOL();
 	}else{
-	    err_loger.stream()<<"epoll_wait fail :"  << errno<<log_warper::EOL();
+	    err_loger.stream()<<"epoll_wait fail :"  << errno<<EOL();
 	}
 
 	/// FIXME: return timestamp
@@ -45,14 +45,14 @@ void ep_poller::update_channel( io_channel* channel )
     BOOST_ASSERT( channel );
     if(channel->reg_stat() == k_cnl_ctl_no_reg || channel->reg_stat()  == k_cnl_ctl_removed){
         BOOST_ASSERT( m_registered_channels.find (channel->fd() ) == m_registered_channels.end ());
-        update_channel(channel,EPOLL_CTL_ADD);
+        do_update_channel(channel,EPOLL_CTL_ADD);
     }else if(channel->reg_stat() == k_cnl_ctl_reged){
         BOOST_ASSERT( m_registered_channels.find (channel->fd() ) != m_registered_channels.end ());
-        BOOST_ASSERT( m_registered_channels.find (channel->fd() ).second == channel);
+        BOOST_ASSERT( m_registered_channels.find (channel->fd() )->second == channel);
         if(channel->no_event()){
-            update_channel(channel,EPOLL_CTL_DEL);
+            do_update_channel(channel,EPOLL_CTL_DEL);
         }else{
-            update_channel(channel,EPOLL_CTL_MOD);
+            do_update_channel(channel,EPOLL_CTL_MOD);
         }
     }else{
         BOOST_ASSERT( 1==0 );
@@ -76,7 +76,7 @@ void    ep_poller::do_update_channel(io_channel* channel,int32_t how)
     evt.data.ptr=channel;
     int32_t ret = epoll_ctl(m_ep_fd, how, channel->fd(), &evt);
     if(ret != 0){
-        err_loger.stream()<<"epoll_ctl fail :"  << errno<<log_warper::EOL();
+        err_loger.stream()<<"epoll_ctl fail :"  << errno<<EOL();
     }
 }
 

@@ -1,6 +1,11 @@
-﻿#include <muradin/net/io_channel.h>
+#include <muradin/net/io_channel.h>
+
+#include <muradin/net/io_service.h>
+
 #include <sys/epoll.h>
-#include <poll.h>
+//#include <poll.h>
+        
+#include <boost/assert.hpp>
 
 BOOST_STATIC_ASSERT(  sizeof(int32_t) == sizeof(int));
 
@@ -59,11 +64,11 @@ void		io_channel::handle_event(/*int32_t evt_tag*/)
 
 	if (m_evt_tag & (EPOLLERR /* | EPOLLNVAL */))
 	{
-		if (m_error_cb) m_error_cb(0);
+		if (m_error_cb) m_error_cb();
 	}
 	if (m_evt_tag & (EPOLLIN | EPOLLPRI | EPOLLRDHUP))
 	{
-		if (m_read_cb) m_read_cb( 0 );
+		if (m_read_cb) m_read_cb();
 	}
 	if (m_evt_tag & EPOLLOUT)
 	{

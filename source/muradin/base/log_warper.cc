@@ -85,7 +85,7 @@ public:
 	{
 		static const char* space_2="  ";
 		ostream_<<"["<< LOG_LVL_NAME[log_levl_]<<"]";
-		ostream_<<space_2<<"UTC "<<base::Timestamp::now ().toFormattedString ()<<space_2;
+		ostream_<<space_2<<"UTC "<<base::timestamp::now ().to_formatted_string ()<<space_2;
 		ostream_<< "[";
 		if (source_file.length() + func_name.length() > 0){
 			ostream_<<"S="<<source_file<<g_str_spliter
@@ -99,7 +99,7 @@ public:
 	{
 		static const char* space_2="  ";
 		ostream_<<"["<< LOG_LVL_NAME[log_levl_]<<"]";
-		ostream_<< space_2<<"UTC "<<base::Timestamp::now ().toFormattedString ()<<space_2;
+		ostream_<< space_2<<"UTC "<<base::timestamp::now ().to_formatted_string ()<<space_2;
 		ostream_<< "[";
 		if (source_file.length() + func_name.length() > 0){
 			ostream_<<"S="<<source_file<<g_str_spliter

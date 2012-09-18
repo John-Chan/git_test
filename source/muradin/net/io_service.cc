@@ -1,5 +1,7 @@
 #include <muradin/net/io_service.h>
 #include <muradin/net/evt_poller/epoll_poller.h>
+#include <muradin/base/log_warper.h>
+#include <muradin/net/io_channel.h>
 
 #include <sys/eventfd.h>
 
@@ -8,7 +10,7 @@ int	create_evt_fd()
 {   
 	int fd= ::eventfd(0, EFD_CLOEXEC | EFD_NONBLOCK );
 	if (fd <= 0){
-		fata_loger.stream()<<"create eventfd fail,error = " << <<errno<<log_warper::EOL();
+		fata_loger.stream()<<"create eventfd fail,error = "  <<errno<< EOL();
 		::abort ();
 	}
 	return fd;
@@ -23,7 +25,7 @@ io_service::io_service()
 m_init_tid(boost::this_thread::get_id ()),
 m_exit(false),
 m_weekup_fd(create_evt_fd()),
-m_weekup_channel(new io_channel(m_weekup_fd,this))
+m_weekup_channel(new io_channel(m_weekup_fd,*this))
 {
 }
 io_service::~io_service()
@@ -69,7 +71,7 @@ void	io_service::weekup()
 void	io_service::exec_active_channel(channel_vec &channel_list)
 {
 	for(size_t i=0;i<channel_list.size ();++i){
-		channel_list[i].handle_event ();
+		channel_list[i]->handle_event ();
 	}
 }
 
