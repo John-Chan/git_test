@@ -50,9 +50,14 @@ namespace net{
 
 		void		reg_read_event();
 		void		reg_write_event();
+        
+        void		unreg_read_event();
+		void		unreg_write_event();
 
 		/// reg_read_event + reg_write_event
 		void		reg_rw_event();
+		/// unreg_read_event + unreg_write_event
+		void		unreg_rw_event();
 
 		void		handle_event(/*int32_t evt_tag*/);
 

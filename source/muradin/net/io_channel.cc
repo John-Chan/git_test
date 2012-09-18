@@ -47,6 +47,22 @@ void		io_channel::reg_rw_event()
 	m_service.alter_channel (this);
 }
 
+void		io_channel::unreg_read_event()
+{
+    m_evt_tag &= ~( EPOLLIN | EPOLLPRI );
+	m_service.alter_channel (this);
+}
+void		io_channel::unreg_write_event()
+{
+	m_evt_tag &= ~( EPOLLOUT  );
+	m_service.alter_channel (this);
+}
+void		io_channel::unreg_rw_event()
+{
+    m_evt_tag &= ~( EPOLLIN | EPOLLPRI );
+	m_evt_tag &= ~( EPOLLOUT  );
+	m_service.alter_channel (this);
+}
 void		io_channel::handle_event(/*int32_t evt_tag*/)
 {
 	m_in_evt_hand = true;

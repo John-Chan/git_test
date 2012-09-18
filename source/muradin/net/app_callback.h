@@ -15,7 +15,7 @@ namespace net
 	typedef	boost::function<void(channel_buffer&)>		read_callback;
 	typedef	boost::function<void(size_t)>				write_callback;
 	typedef	boost::function<void(int)>					err_callback;
-	typedef	boost::function<void()>					close_callback;
+	typedef	boost::function<void()>                     close_callback;
 	typedef	boost::function<void(const endpoint_v4&)>	connect_callback;
 
 };

@@ -7,18 +7,36 @@
 
 #ifndef MURADIN_NET_IO_SERVICES_THREAD_H__
 #define	MURADIN_NET_IO_SERVICES_THREAD_H__
-#include <boost/utility.hpp>
+
 #include <muradin/base/thread.h>
+
+#include <boost/utility.hpp>
+#include <boost/smart_ptr.hpp>
+#include <boost/thread.hpp>
+#include <boost/thread/condition.hpp>
+
+
 namespace muradin{
 namespace net{
 
+class io_service;
+
 class io_service_thread : public boost::noncopyable
 {
+    typedef boost::scoped_ptr<muradin::base::thread> thread_ptr;
 public:
     io_service_thread();
     ~io_service_thread();
+    
+    io_service* run();
+    void        join();
 private:
-
+    void thread_func();
+private:
+    io_service*     m_service;
+    thread_ptr      m_thread;
+    boost::mutex    m_mutex;
+    boost::condition_variable   m_cond;
 };
 
 };

@@ -25,17 +25,17 @@ namespace muradin{
 
 			~endpoint_v4();
 
-			const SockecAddressV4&	Address()const;
-			SockecAddressV4&		Address();
-			const std::string		GetIP()const;
-			uint16_t				GetPort()const;
+			const SockecAddressV4&	address()const;
+			SockecAddressV4&		address();
+			const std::string		get_ip()const;
+			uint16_t				get_port()const;
 
-			static std::string		AddressAny();
-			static uint16_t			PortAny();
+			static std::string		address_any();
+			static uint16_t			port_any();
 
 			const endpoint_v4&		operator=(const SockecAddressV4& rh);
 		private:
-			SockecAddressV4	address_;
+			SockecAddressV4	m_address;
 			enum {kPortAny=0};
 		};
 	};//base

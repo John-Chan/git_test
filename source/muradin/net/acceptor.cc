@@ -1,69 +1,57 @@
-#include "tcp_socket.h"
-#include <assert.h>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include "end_point.h"
+#include <muradin/net/acceptor.h>
+
+
+#include <muradin/net/io_service.h>
+#include <muradin/net/tcp_socket.h>
+#include <muradin/base/log_warper.h>
+
+#include <errno.h>
+
+#include <boost/bind.hpp>
 
 namespace muradin{
 namespace net{
-	int		tcp_socket_create()
-	{
-		return ::socket(AF_INET,SOCK_STREAM | SOCK_CLOEXEC ,0);
-	}
-	
-	int		tcp_nbsocket_create()
-	{
-		return ::socket(AF_INET,SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC,0);
-	}
-	
-	int		tcp_socket_bind(int fd,const EndPointV4& endpoint)
-	{
-		return ::bind(fd,(const struct sockaddr *)&endpoint.Address(),sizeof(struct sockaddr));
-	}
-	int		tcp_socket_accept(int listen_fd, EndPointV4& peer)
-	{
-		net::SockecAddressV4 add_buf;
-		socklen_t  len=sizeof(net::SockecAddressV4);
-		int ret= ::accept(listen_fd,(struct sockaddr*)&add_buf,&len);
-		assert(sizeof(SockecAddressV4) >= len);
-		if(ret != -1){
-			peer = add_buf;
-			//peer = net::EndPointV4( add_buf );
-		}
-		return ret;
-	}
-	
-	void	set_nonblock(int fd)
-	{
-		int flags = ::fcntl(fd, F_GETFL, 0);
-		flags |= O_NONBLOCK;
-		int ret = ::fcntl(fd, F_SETFL, flags);
-		// FIXME check
-		(void)ret;
-	}
-	
-	void	set_close_on_exec(int fd)
-	{
-		int flags = ::fcntl(fd, F_GETFD, 0);
-		flags |= FD_CLOEXEC;
-		int ret  = ::fcntl(fd, F_SETFD, flags);
-		// FIXME check
-		(void)ret;
-	}
-
-	int	shutdown_r(int fd)
-	{
-		return ::shutdown(fd,SHUT_RD);
-	}
-	int	shutdown_w(int fd)
-	{
-		return ::shutdown(fd,SHUT_WR);
-	}
-	int	shutdown_rw(int fd)
-	{
-		return ::shutdown(fd,SHUT_RDWR);
-	}
-	
+    acceptor::acceptor(io_service& service,const endpoint_v4& listen_addr)
+    :m_listen_fd( tcp_nbsocket_create() ),
+    m_listen_addr(listen_addr),
+    m_service(service),
+    m_channel(m_listen_fd,service ),
+    m_accept_cb(NULL)
+    {
+        m_channel.set_read_cb( boost::bind(&acceptor::on_accept,this));
+        m_service.alter_channel(&m_channel);
+    }
+    acceptor::~acceptor()
+    {
+        //
+    }
+        
+    int     acceptor::start()
+    {
+        int ret_code= tcp_socket_bind(m_listen_fd,m_listen_addr);
+        if(ret_code == 0 ) ret_code= tcp_socket_listen(m_listen_fd,256);
+        if(ret_code ==0 ) m_channel.reg_read_event();
+        return ret_code;
+    }
+    void    acceptor::stop()
+    {
+        m_channel.unreg_read_event();
+    }
+    void    acceptor::on_accept()
+    {
+        //SOCK_NONBLOCK SOCK_CLOEXEC m_accept_cb
+        endpoint_v4 peer;
+        int fd=tcp_socket_accept(m_listen_fd,peer);
+        if(fd != -1){
+            m_accept_cb(fd,peer);
+        }else{
+            err_loger.stream()<<"tcp_socket_accept fail,errno = " << errno <<EOL();
+        }
+    }    
+    void    acceptor::set_accept_callback(const accept_callback& cb)
+    {
+        BOOST_ASSERT(m_accept_cb == NULL);
+        m_accept_cb=cb;
+    }
 };//net
 };

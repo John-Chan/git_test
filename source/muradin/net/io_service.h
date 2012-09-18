@@ -33,8 +33,8 @@ namespace net{
 		io_service();
 		~io_service();
 
-		int		start();
-		void	stop();
+		void	run();
+		void	exit();
 		void	alter_channel(io_channel* channel);
 		void	run_functor(const functor& func);
 	protected:

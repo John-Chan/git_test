@@ -1,10 +1,10 @@
-#ifndef MURADIN_NET_TCP_SOCKET_H_
-#define MURADIN_NET_TCP_SOCKET_H_
+#ifndef MURADIN_NET_TCP_SOCKET_H__
+#define MURADIN_NET_TCP_SOCKET_H__
 
 namespace muradin{
 namespace net{
 	
-	class EndPointV4;
+	class endpoint_v4;
 	
 	//创建一个非阻塞套接字并带有FD_CLOEXEC选项
 	int		tcp_nbsocket_create();
@@ -12,9 +12,12 @@ namespace net{
 	//创建一个阻塞套接字并带有FD_CLOEXEC选项
 	int		tcp_socket_create();
 	
-	int		tcp_socket_bind(int fd,const EndPointV4& endpoint);
+	int		tcp_socket_bind(int fd,const endpoint_v4& endpoint);
+    
+    
+	int		tcp_socket_listen(int fd,int bcaklog);
 	
-	int		tcp_socket_accept(int listen_fd, EndPointV4& peer);
+	int		tcp_socket_accept(int listen_fd, endpoint_v4& peer);
 		
 	//设置非阻塞
 	void	set_nonblock(int fd);
@@ -30,4 +33,4 @@ namespace net{
 	
 };//net
 };
-#endif//MURADIN_NET_TCP_SOCKET_H_
+#endif//MURADIN_NET_TCP_SOCKET_H__

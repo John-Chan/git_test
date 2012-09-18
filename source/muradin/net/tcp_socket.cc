@@ -21,11 +21,16 @@ namespace net{
 		return ::socket(AF_INET,SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC,0);
 	}
 
-	int		tcp_socket_bind(int fd,const EndPointV4& endpoint)
+	int		tcp_socket_bind(int fd,const endpoint_v4& endpoint)
 	{
-		return ::bind(fd,(const struct sockaddr *)&endpoint.Address(),sizeof(struct sockaddr));
+		return ::bind(fd,(const struct sockaddr *)(&endpoint.address()),sizeof(struct sockaddr));
 	}
-	int		tcp_socket_accept(int listen_fd, EndPointV4& peer)
+    
+    int		tcp_socket_listen(int fd,int bcaklog)
+    {
+        return ::listen(fd,bcaklog);
+    }
+	int		tcp_socket_accept(int listen_fd, endpoint_v4& peer)
 	{
 		net::SockecAddressV4 add_buf;
 		socklen_t  len=sizeof(net::SockecAddressV4);

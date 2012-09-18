@@ -33,11 +33,11 @@ io_service::~io_service()
 	::close(m_weekup_fd); m_weekup_fd=-1;
 }
 
-int		io_service::start()
+void		io_service::run()
 {
 	evt_loop();
 }
-void	io_service::stop()
+void	io_service::exit()
 {
 	m_exit=true;
 	weekup ();

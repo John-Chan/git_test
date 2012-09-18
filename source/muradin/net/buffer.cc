@@ -9,7 +9,7 @@
 /************************************************************************/
 namespace muradin
 {
-namespace base{
+namespace net{
 
 	const char channel_buffer::kCRLF[] = "\r\n";
 
@@ -196,5 +196,5 @@ namespace base{
 			return false;
 		}
 	}
-};//base
+};//net
 };//muradin

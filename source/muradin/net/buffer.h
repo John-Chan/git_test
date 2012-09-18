@@ -1,4 +1,3 @@
-
 #ifndef MURADIN_NET_BUFFER_H__
 #define MURADIN_NET_BUFFER_H__
 
@@ -12,7 +11,7 @@
 
 namespace muradin
 {
-namespace base{
+namespace net{
 
 	class channel_buffer
 	{
@@ -24,84 +23,84 @@ namespace base{
 
 		// default copy-ctor, dtor and assignment are fine
 
-		//! ½»»»Á½¸ö¶ÔÏó
+		//! äº¤æ¢ä¸¤ä¸ªå¯¹è±¡
 		void swap(channel_buffer& rhs);
 
-		//! ·µ»Ø¿É¶ÁÊı¾İµÄÊıÁ¿
+		//! è¿”å›å¯è¯»æ•°æ®çš„æ•°é‡
 		size_t readableBytes() const;
 
-		//! ·µ»Ø¿ÉĞ´¿Õ¼ä´óĞ¡
+		//! è¿”å›å¯å†™ç©ºé—´å¤§å°
 		size_t writableBytes() const;
 
-		//! ·µ»Ø±£ÁôÇøÓò´óĞ¡
+		//! è¿”å›ä¿ç•™åŒºåŸŸå¤§å°
 		size_t prependableBytes() const;
 
-		//! ·µ»Øµ±Ç°¶ÁÖ¸Õë.¸ÃÖ¸Õë²»¿É³¤ÆÚ³ÖÓĞ.
+		//! è¿”å›å½“å‰è¯»æŒ‡é’ˆ.è¯¥æŒ‡é’ˆä¸å¯é•¿æœŸæŒæœ‰.
 		const char* peek() const;
 
-		//! ·µ»Øµ±Ç°¶ÁÖ¸Õë.¸ÃÖ¸Õë²»¿É³¤ÆÚ³ÖÓĞ.
+		//! è¿”å›å½“å‰è¯»æŒ‡é’ˆ.è¯¥æŒ‡é’ˆä¸å¯é•¿æœŸæŒæœ‰.
 		char*		read_ptr();
 
-		//! ½«¶ÁÖ¸ÕëÒÆ¶¯Ò»¶Î¾àÀë
+		//! å°†è¯»æŒ‡é’ˆç§»åŠ¨ä¸€æ®µè·ç¦»
 		void retrieve(size_t len);
 
-		//! ½«¶ÁÖ¸ÕëÒÆ¶¯µ½end ´¦,end±ØĞëÊÇÊôÓÚÄÚ²¿»º³åÇøÄÚµÄÖ¸Õë
+		//! å°†è¯»æŒ‡é’ˆç§»åŠ¨åˆ°end å¤„,endå¿…é¡»æ˜¯å±äºå†…éƒ¨ç¼“å†²åŒºå†…çš„æŒ‡é’ˆ
 		void retrieveUntil(const char* end);
 
-		//! ½«¶ÁÖ¸ÕëÒÆ¶¯Ò»¸öintÎ»ÖÃ
+		//! å°†è¯»æŒ‡é’ˆç§»åŠ¨ä¸€ä¸ªintä½ç½®
 		void retrieveInt32();
 
-		//! Ö±½Ó¸´Î»¶ÁĞ´Î»ÖÃ
+		//! ç›´æ¥å¤ä½è¯»å†™ä½ç½®
 		void retrieveAll();
 
-		//! ½«Êı¾İÈ¡³ö,×÷Îªstring·µ»Ø,²¢¸´Î»¶ÁĞ´Î»ÖÃ
+		//! å°†æ•°æ®å–å‡º,ä½œä¸ºstringè¿”å›,å¹¶å¤ä½è¯»å†™ä½ç½®
 		std::string retrieveAsString();
 
 
-		//! ±£´æÕûĞÍÊı¾İ
+		//! ä¿å­˜æ•´å‹æ•°æ®
 		template <class T>
 		void	append_integer(T val)
 		{
 			append(&val,sizeof(T));
 		};
 
-		//! ±£´æÒ»¸ö×Ö·û´®µÄÊı¾İ
+		//! ä¿å­˜ä¸€ä¸ªå­—ç¬¦ä¸²çš„æ•°æ®
 		void append(const std::string& str);
 
-		//! ±£´æchannel_buffer¶ÔÏó
+		//! ä¿å­˜channel_bufferå¯¹è±¡
 		void append(const channel_buffer& another);
 
-		//! ±£´æcharĞÍÊı¾İ
+		//! ä¿å­˜charå‹æ•°æ®
 		void append(const char* /*restrict*/ data, size_t len);
 
-		//! ±£´æÈÎÒâÊı¾İ
+		//! ä¿å­˜ä»»æ„æ•°æ®
 		void append(const void* /*restrict*/ data, size_t len);
 
-		//! À©Èİ¿ÉĞ´ÇøÓò,ÒÔÂú×ãÖÁÉÙÓĞlen´óĞ¡µÄÇøÓò¿ÉĞ´.
+		//! æ‰©å®¹å¯å†™åŒºåŸŸ,ä»¥æ»¡è¶³è‡³å°‘æœ‰lenå¤§å°çš„åŒºåŸŸå¯å†™.
 		void ensureWritableBytes(size_t len);
 
-		//! ·µ»ØĞ´Ö¸Õë,¸ÃÖ¸Õë²»¿É³¤ÆÚ³ÖÓĞ
+		//! è¿”å›å†™æŒ‡é’ˆ,è¯¥æŒ‡é’ˆä¸å¯é•¿æœŸæŒæœ‰
 		char* beginWrite();
 
-		//! ·µ»ØĞ´Ö¸Õë,¸ÃÖ¸Õë²»¿É³¤ÆÚ³ÖÓĞ
+		//! è¿”å›å†™æŒ‡é’ˆ,è¯¥æŒ‡é’ˆä¸å¯é•¿æœŸæŒæœ‰
 		const char* beginWrite() const;
 
-		//! ½«Ğ´Ö¸ÕëÒÆ¶¯Ò»¶Î¾àÀë
+		//! å°†å†™æŒ‡é’ˆç§»åŠ¨ä¸€æ®µè·ç¦»
 		void hasWritten(size_t len);
 
-		//! ÏòÇ°Ğ´ÈëÊı¾İ(½«Êı¾İ±£´æµ½µ±Ç°¶ÁÖ¸ÕëµÄÇ°Ãæ)
+		//! å‘å‰å†™å…¥æ•°æ®(å°†æ•°æ®ä¿å­˜åˆ°å½“å‰è¯»æŒ‡é’ˆçš„å‰é¢)
 		void prepend(const void* /*restrict*/ data, size_t len);
 
-		//! Ëõ¼õÄÚ´æ
+		//! ç¼©å‡å†…å­˜
 		void shrink(size_t reserve);
 
-		//! ²éÕÒ»»ºÅ»Ø³µ·ûºÅ
+		//! æŸ¥æ‰¾æ¢å·å›è½¦ç¬¦å·
 		const char* findCRLF() const;
 
-		//! ´Óstart ³ö¿ªÊ¼,²éÕÒ»»ºÅ»Ø³µ·ûºÅ
+		//! ä»start å‡ºå¼€å§‹,æŸ¥æ‰¾æ¢å·å›è½¦ç¬¦å·
 		const char* findCRLF(const char* start) const;
 
-		//! ¶ªÆúÒ»²¿·ÖÎ´¶ÁµÄÎ²²¿Êı¾İ
+		//! ä¸¢å¼ƒä¸€éƒ¨åˆ†æœªè¯»çš„å°¾éƒ¨æ•°æ®
 		bool		drop_end(size_t len);
 	private:
 		char* begin();
@@ -118,7 +117,7 @@ namespace base{
 
 	};
 
-};//base
+};//net
 };//muradin
 
 #endif // MURADIN_NET_BUFFER_H__
