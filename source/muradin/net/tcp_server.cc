@@ -33,7 +33,7 @@ int tcp_server::stop()
 void    tcp_server::on_accept(int fd,const endpoint_v4& peer )
 {
     BOOST_ASSERT( m_conn_map.find(fd) == m_conn_map.end() );
-    m_conn_map.insert(fd, (new tcp_connection(*m_service_poll->get_services(),peer) ));
+    m_conn_map.insert(fd, (new tcp_connection(fd,*m_service_poll->get_services(),peer) ));
     //
 }
 

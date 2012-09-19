@@ -15,7 +15,7 @@ namespace net{
 	{
 		typedef boost::scoped_ptr<io_channel>	channel_ptr;
 	public:
-		tcp_connection(io_service&	services,const endpoint_v4& peer);
+		tcp_connection(int fd,io_service&	services,const endpoint_v4& peer);
 		~tcp_connection();
 		void	write(const void* data,size_t len);
 		void	read(void* data,size_t max_read);
@@ -31,7 +31,10 @@ namespace net{
 		void	set_err_cb(const err_callback& func);
 		void	set_close_cb(const close_callback& func);
 	private:
-		//
+		void    on_read();
+        void    on_write();
+        void    on_error();
+        void    on_close();
 	private:
 		io_service&	m_services;
 		/// cache data that can not send directly
