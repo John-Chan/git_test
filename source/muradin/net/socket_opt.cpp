@@ -13,7 +13,12 @@ namespace muradin
 {
 namespace net
 {
-    
+int socket_opt::set_reuse_addr(int fd,bool enabled)
+{
+  int optval = enabled ? 1 : 0;
+  return ::setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
+
+}    
 int socket_opt::retrieve_error(int fd)
 {
     int       optval;

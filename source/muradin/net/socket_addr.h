@@ -23,6 +23,6 @@ int	net_pton(int family,const char* ip_str,void* dest );
 const char*	net_ntop(int family,const void* ip,char* dest,size_t dest_bytes );
 
 
-};
-};
+}
+}
 #endif // MURADIN_NET_SOCKETADDR_H

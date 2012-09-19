@@ -16,6 +16,7 @@ namespace net
     {
     public:
         static int retrieve_error(int fd);
+        static int set_reuse_addr(int fd,bool enabled);
     };
 }
 }

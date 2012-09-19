@@ -3,6 +3,12 @@
 
 #include <muradin/net/app_callback.h>
 
+#include <muradin/net/acceptor.h>
+#include <muradin/net/io_service.h>
+#include <muradin/net/io_service_pool.h>
+#include <muradin/net/end_point.h>
+#include <muradin/net/connection.h>
+
 #include <boost/smart_ptr.hpp>
 #include <boost/utility.hpp>
 #include <boost/ptr_container/ptr_map.hpp>
@@ -11,10 +17,10 @@
 namespace muradin{
 namespace net{
 	
-	class endpoint_v4;
-    class tcp_connection;
-    class io_service_pool;
-    class acceptor;
+//	class endpoint_v4;
+//    class tcp_connection;
+//    class io_service_pool;
+//    class acceptor;
     class tcp_server:public boost::noncopyable
     {
         typedef boost::ptr_map<int,tcp_connection> conn_map;
@@ -33,7 +39,7 @@ namespace net{
         acceptor_ptr     m_acceptor;
     };
 
-};//net
-};
+}//net
+}
 
 #endif//MURADIN_NET_TCP_SERVER_H__

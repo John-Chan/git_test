@@ -31,6 +31,7 @@ io_service* io_service_pool::get_services()
     if(m_next_thread_index >= m_services.size() ) m_next_thread_index=0;
     return m_services[m_next_thread_index++];
 }
+
 unsigned int io_service_pool::size()const
 {
     return m_services.size();

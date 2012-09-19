@@ -36,6 +36,6 @@ namespace net{
         accept_callback m_accept_cb;
     };
 	
-};//net
-};
+}//net
+}
 #endif//MURADIN_NET_ACCEPTOR_H__

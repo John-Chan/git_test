@@ -1,10 +1,3 @@
-/* 
- * File:   io_service_pool.h
- * Author: xRoy
- *
- * Created on 2012年9月19日, 上午10:59
- */
-
 #ifndef MURADIN_NET_IO_SERVICE_POOL_H__
 #define	MURADIN_NET_IO_SERVICE_POOL_H__
 

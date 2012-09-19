@@ -196,5 +196,5 @@ namespace net{
 			return false;
 		}
 	}
-};//net
-};//muradin
+}//net
+}//muradin

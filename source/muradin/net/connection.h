@@ -50,5 +50,5 @@ namespace net{
 		close_callback	m_on_close;
 	};
 
-};//net
-};//muradin
+}//net
+}//muradin

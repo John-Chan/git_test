@@ -31,6 +31,6 @@ namespace net{
 	// 等同于先调用shutdown_r,然后调用shutdown_w
 	int		shutdown_rw(int fd);
 	
-};//net
-};
+}//net
+}
 #endif//MURADIN_NET_TCP_SOCKET_H__

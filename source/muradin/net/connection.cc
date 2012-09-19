@@ -92,5 +92,5 @@ void    tcp_connection::on_close()
     //do callback;
 }
 
-};//net
-};//muradin
+}//net
+}//muradin

@@ -118,5 +118,5 @@ void		io_channel::set_close_cb(cb_close_evt cb)
 }
 
 
-};//net
-};//muradin
+}//net
+}//muradin

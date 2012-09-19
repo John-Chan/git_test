@@ -107,6 +107,6 @@ inline timestamp add_time(timestamp tmstamp, double seconds)
   return timestamp(tmstamp.micro_seconds_since_epoch() + delta);
 }
 
-};//namespace base
-};//muradin
+}//namespace base
+}//muradin
 #endif // MURADIN_BASE_TIMESTAMP_H__

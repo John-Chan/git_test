@@ -59,8 +59,8 @@ private:
 	loger*		impl_;
 };
 
-};//base
-};//muradin
+}//base
+}//muradin
 
 #define		debug_loger					(muradin::base::log_warper(muradin::base::ll_debug,__FILE__,__FUNCTION__,__LINE__))
 #define		debug_err_loger				(muradin::base::log_warper(muradin::base::ll_debug,__FILE__,__FUNCTION__,__LINE__,(get_last_error_)))

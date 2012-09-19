@@ -18,8 +18,8 @@ namespace net
 	typedef	boost::function<void()>                     close_callback;
 	typedef	boost::function<void(const endpoint_v4&)>	connect_callback;
 
-};
-};
+}
+}
 
 
 #endif

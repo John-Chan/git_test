@@ -1,6 +1,6 @@
 #include <muradin/net/acceptor.h>
 
-
+#include <muradin/net/socket_opt.h>
 #include <muradin/net/io_service.h>
 #include <muradin/net/tcp_socket.h>
 #include <muradin/base/log_warper.h>
@@ -18,6 +18,9 @@ namespace net{
     m_channel(m_listen_fd,service ),
     m_accept_cb(NULL)
     {
+        if(socket_opt::set_reuse_addr(m_listen_fd,true) != 0 ){
+            err_loger.stream()<<"set_reuse_addr fail,errno = " << errno <<EOL();
+        }
         m_channel.set_read_cb( boost::bind(&acceptor::on_accept,this));
         m_service.alter_channel(&m_channel);
     }
@@ -53,5 +56,5 @@ namespace net{
         BOOST_ASSERT(m_accept_cb == NULL);
         m_accept_cb=cb;
     }
-};//net
-};
+}//net
+}

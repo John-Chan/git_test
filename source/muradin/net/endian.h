@@ -1,7 +1,6 @@
 #ifndef MURADIN_NET_ENDIAN_H_
 #define MURADIN_NET_ENDIAN_H_
 
-
 #include <muradin/config/integer_define.h>
 
 namespace muradin{
@@ -49,8 +48,8 @@ namespace muradin{
 		{
 			return is_big_endianess();
 		}
-	};//net
-};//muradin
+	}//net
+}//muradin
 
 
 

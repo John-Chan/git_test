@@ -117,7 +117,7 @@ namespace net{
 
 	};
 
-};//net
-};//muradin
+}//net
+}//muradin
 
 #endif // MURADIN_NET_BUFFER_H__

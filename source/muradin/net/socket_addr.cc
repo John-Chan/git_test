@@ -18,5 +18,5 @@ const char*	net_ntop(int family,const void* ip,char* dest,size_t dest_bytes )
 	return ::inet_ntop(family,ip,dest,dest_bytes);
 }
 
-};//net
-};
+}//net
+}

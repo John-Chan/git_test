@@ -30,6 +30,6 @@ namespace base{
 		boost::thread*		m_thread;
 	};
 
-};//base
-};//muradin
+}//base
+}//muradin
 #endif // MURADIN_BASE_THREAD_H__

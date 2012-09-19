@@ -54,7 +54,7 @@ namespace net{
 		boost::scoped_ptr<io_channel>	m_weekup_channel;
 		
 	};
-};//net
-};//muradin
+}//net
+}//muradin
 
 #endif//MURADIN_NET_IO_SERVICE_H__

@@ -215,5 +215,5 @@ void log_warper::setFlush(FlushFunc  func)
 {
 	g_flush_func = func;
 }
-};//base
-};//muradin
+}//base
+}//muradin

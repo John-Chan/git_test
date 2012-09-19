@@ -39,8 +39,8 @@ private:
     boost::condition_variable   m_cond;
 };
 
-};
-};
+}
+}
 
 #endif	/* MURADIN_NET_IO_SERVICES_THREAD_H__ */
 

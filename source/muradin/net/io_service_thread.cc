@@ -44,5 +44,5 @@ void io_service_thread::thread_func()
     service.run();
 }
 
-};
-};
+}
+}

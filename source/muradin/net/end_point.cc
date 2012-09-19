@@ -6,7 +6,7 @@
 
 
 namespace muradin{
-	namespace net{
+namespace net{
 
 		endpoint_v4::endpoint_v4(const std::string& ip,uint16_t port)
 		{
@@ -87,5 +87,5 @@ namespace muradin{
 			::memcpy(&m_address,&rh,sizeof(SockecAddressV4));
 			return *this;
 		}
-	};//net
-};//muradin
+}//net
+}//muradin

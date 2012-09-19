@@ -7,7 +7,7 @@
 #include <string>
 
 namespace muradin{
-	namespace net{
+namespace net{
 
 		typedef	sockaddr_in			SockecAddressV4;	// same as struct sockaddr
 
@@ -38,8 +38,8 @@ namespace muradin{
 			SockecAddressV4	m_address;
 			enum {kPortAny=0};
 		};
-	};//base
-};//muradin
+}//base
+}//muradin
 
 
 #endif // MURADIN_NET_ENDPOINT_H_

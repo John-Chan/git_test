@@ -1,5 +1,6 @@
 #include <muradin/net/tcp_socket.h>
 #include <muradin/net/end_point.h>
+#include <muradin/base/log_warper.h>
 
 #include <assert.h>
 #include <sys/socket.h>
@@ -32,6 +33,7 @@ namespace net{
     }
 	int		tcp_socket_accept(int listen_fd, endpoint_v4& peer)
 	{
+        debug_loger.stream()<<"call accept" <<EOL();
 		net::SockecAddressV4 add_buf;
 		socklen_t  len=sizeof(net::SockecAddressV4);
 		int ret= ::accept(listen_fd,(struct sockaddr*)&add_buf,&len);
@@ -75,5 +77,5 @@ namespace net{
 
 
 
-};//net
-};
+}//net
+}

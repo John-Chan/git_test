@@ -86,6 +86,6 @@ namespace net{
 		cb_error_evt			m_error_cb;
 		cb_close_evt			m_close_cb;
     };
-};//net
-};//muradin
+}//net
+}//muradin
 #endif // MURADIN_NET_IO_CHANNEL_H__

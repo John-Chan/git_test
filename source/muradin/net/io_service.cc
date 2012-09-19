@@ -58,7 +58,7 @@ void	io_service::evt_loop()
 		channel_vec signled_channel;
 
 		/// pending in epoll_wait
-		m_poller->wait_for_evt (signled_channel,1*1000);
+		m_poller->wait_for_evt (signled_channel,5*1000);
 
 		exec_active_channel(signled_channel);
 	}
@@ -94,5 +94,5 @@ void io_service::on_read( uint32_t size )
 	::read (m_weekup_fd,buff,sizeof(uint64_t));
 }
 
-};//net
-};//muradin
+}//net
+}//muradin
