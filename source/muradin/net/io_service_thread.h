@@ -24,6 +24,7 @@ class io_service;
 class io_service_thread : public boost::noncopyable
 {
     typedef boost::scoped_ptr<muradin::base::thread> thread_ptr;
+    typedef boost::condition_variable                cond_type;
 public:
     io_service_thread();
     ~io_service_thread();
@@ -36,7 +37,8 @@ private:
     io_service*     m_service;
     thread_ptr      m_thread;
     boost::mutex    m_mutex;
-    boost::condition_variable   m_cond;
+    cond_type       m_cond;
+    const boost::thread::id			m_init_tid;
 };
 
 }

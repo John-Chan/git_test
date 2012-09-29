@@ -27,10 +27,12 @@ m_exit(false),
 m_weekup_fd(create_evt_fd()),
 m_weekup_channel(new io_channel(m_weekup_fd,*this))
 {
+    //fata_loger.stream()<<"io_service "  <<errno<< EOL();
 }
 io_service::~io_service()
 {
 	::close(m_weekup_fd); m_weekup_fd=-1;
+    //fata_loger.stream()<<"~io_service "  <<errno<< EOL();
 }
 
 void		io_service::run()
@@ -44,7 +46,7 @@ void	io_service::exit()
 }
 void	io_service::alter_channel(io_channel* channel)
 {
-	BOOST_ASSERT(boost::this_thread::get_id () == m_init_tid);
+	//BOOST_ASSERT(boost::this_thread::get_id () == m_init_tid);
 	m_poller->update_channel (channel);
 }
 void	io_service::run_functor(const functor& func)
